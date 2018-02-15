@@ -76,17 +76,21 @@ final class UIModel {
         }
         data.loadContacts(data.getUrl());
     }
-     @ModelOperation @Function static void addNote(UI data) {
-        data.getEdited().setFirstName("jarda");
-        data.getContacts().add(data.getEdited());
+    
+    @ModelOperation
+    @Function
+    static void addNote(UI data) {
+        if (data.getSelected() == null) {
+            data.getContacts().add(data.getEdited());
+        }
+
         data.setEdited(null);
-       
+
     }
 
     @Function static void addNew(UI ui) {
         ui.setSelected(null);
         final Contact c = new Contact();
-        c.getPhones().add(new Phone("+49 89 0000 0000", PhoneType.HOME));
         ui.setEdited(c);
     }
 
