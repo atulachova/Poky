@@ -76,8 +76,10 @@ final class UIModel {
         }
         data.loadContacts(data.getUrl());
     }
-     @ModelOperation @Function static void bloud(UI data) {
+     @ModelOperation @Function static void addNote(UI data) {
         data.getEdited().setFirstName("jarda");
+        data.getContacts().add(data.getEdited());
+        data.setEdited(null);
        
     }
 

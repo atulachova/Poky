@@ -62,7 +62,7 @@
                     <!-- ko with: address -->
                     
                     <div class="pure-control-group">
-                        <label for="town">obsah</label>
+                        <label for="town">text</label>
                         <input class="pure-input-1-2" id="town" type="text" placeholder="napiš text" data-bind="textInput: town" required>
                         <textarea rows="20" cols="70" data-bind="value: town "></textarea>
                     </div>
@@ -93,11 +93,9 @@
             <form class="pure-form">
                 <fieldset>
                    
-                    <button class="pure-button pure-button-primary" data-bind="click: connect">název
+                    <button class="pure-button pure-button-primary" data-bind="click: addNote">Uložit
                     </button>
-                     <button class="pure-button pure-button-primary" data-bind="click: bloud">text
-                         
-                    </button>
+                    
                 </fieldset>
             </form>
         </div>
