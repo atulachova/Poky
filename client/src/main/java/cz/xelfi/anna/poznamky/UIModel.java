@@ -102,7 +102,7 @@ final class UIModel {
     }
 
     @Function static void delete(UI ui, Contact data) {
-        ui.deleteContact(ui.getUrl(), data.getId(), data);
+        ui.getContacts().remove(data);
     }
 
     @Function static void cancel(UI ui) {
