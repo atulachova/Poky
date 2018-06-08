@@ -81,6 +81,9 @@ final class UIModel {
     static void addNote(UI model, Contact data) {
         if (model.getSelected() == null) {
             model.getContacts().add(model.getEdited());
+        } else {
+            model.getSelected().setFirstName(data.getFirstName());
+            model.getSelected().setAddress(data.getAddress());
         }
 
         model.setEdited(null);
