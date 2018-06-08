@@ -70,7 +70,6 @@ final class UIModel {
 
     @ModelOperation @Function static void connect(UI data) {
         final String u = data.getUrl();
-        data.getEdited().setFirstName("anna");
         if (u.endsWith("/")) {
             data.setUrl(u.substring(0, u.length() - 1));
         }
@@ -79,12 +78,12 @@ final class UIModel {
     
     @ModelOperation
     @Function
-    static void addNote(UI data) {
-        if (data.getSelected() == null) {
-            data.getContacts().add(data.getEdited());
+    static void addNote(UI model, Contact data) {
+        if (model.getSelected() == null) {
+            model.getContacts().add(model.getEdited());
         }
 
-        data.setEdited(null);
+        model.setEdited(null);
 
     }
 
