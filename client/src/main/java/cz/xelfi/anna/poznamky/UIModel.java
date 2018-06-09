@@ -29,53 +29,19 @@ final class UIModel {
     // REST API callbacks
     //
 
-    @OnReceive(url = "{url}", onError = "cannotConnect")
-    static void loadContacts(UI ui, List<Contact> arr) {
-        ui.getContacts().clear();
-        ui.getContacts().addAll(arr);
-        ui.setMessage("Loaded " + arr.size() + " contact(s).");
-    }
+    
 
-    @OnReceive(method = "POST", url = "{url}", data = Contact.class, onError = "cannotConnect")
-    static void addContact(UI ui, List<Contact> updatedOnes, Contact newOne) {
-        ui.getContacts().clear();
-        ui.getContacts().addAll(updatedOnes);
-        ui.setMessage("Created " + newOne.getLastName() + ". " + updatedOnes.size() + " contact(s) now.");
-        ui.setSelected(null);
-        ui.setEdited(null);
-    }
-    @OnReceive(method = "PUT", url = "{url}/{id}", data = Contact.class, onError = "cannotConnect")
-    static void updateContact(UI ui, List<Contact> updatedOnes, Contact original) {
-        ui.getContacts().clear();
-        ui.getContacts().addAll(updatedOnes);
-        ui.setMessage("Updated " + original.getLastName() + ". " + updatedOnes.size() + " contact(s) now.");
-        ui.setSelected(null);
-        ui.setEdited(null);
-    }
+   
+   
 
-    @OnReceive(method = "DELETE", url = "{url}/{id}", onError = "cannotConnect")
-    static void deleteContact(UI ui, List<Contact> remainingOnes, Contact original) {
-        ui.getContacts().clear();
-        ui.getContacts().addAll(remainingOnes);
-        ui.setMessage("Deleted " + original.getLastName() + ". " + remainingOnes.size() + " contact(s) now.");
-    }
+   
 
-    static void cannotConnect(UI data, Exception ex) {
-        data.setMessage("Cannot connect " + ex.getMessage() + ". Should not you start the server project first?");
-    }
-
+   
     //
     // UI callback bindings
     //
 
-    @ModelOperation @Function static void connect(UI data) {
-        final String u = data.getUrl();
-        if (u.endsWith("/")) {
-            data.setUrl(u.substring(0, u.length() - 1));
-        }
-        data.loadContacts(data.getUrl());
-    }
-    
+   
     @ModelOperation
     @Function
     static void addNote(UI model, Contact data) {
@@ -110,35 +76,7 @@ final class UIModel {
         ui.setSelected(null);
     }
 
-    @Function static void commit(UI ui) {
-        final Contact e = ui.getEdited();
-        if (e == null) {
-            return;
-        }
-        String invalid = null;
-        if (e.getValidate() != null) {
-            invalid = e.getValidate();
-        } else if (e.getAddress().getValidate() != null) {
-            invalid = e.getAddress().getValidate();
-        } else for (Phone p : e.getPhones()) {
-            if (p.getValidate() != null) {
-                invalid = p.getValidate();
-                break;
-            }
-        }
-        if (invalid != null && !Dialogs.confirm("Not all data are valid (" +
-                invalid + "). Do you want to proceed?", null
-        )) {
-            return;
-        }
-
-        final Contact s = ui.getSelected();
-        if (s != null) {
-            ui.updateContact(ui.getUrl(), s.getId(), e, e);
-        } else {
-            ui.addContact(ui.getUrl(), e, e);
-        }
-    }
+   
 
     @Function static void addPhoneEdited(UI ui) {
         final List<Phone> phones = ui.getEdited().getPhones();
@@ -168,7 +106,7 @@ final class UIModel {
         uiModel.setEdited(null);
         uiModel.setSelected(null);
         uiModel.applyBindings();
-        uiModel.connect();
+        
     }
 
 }

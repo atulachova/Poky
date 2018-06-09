@@ -46,10 +46,10 @@ final class Contacts {
     ) {
         String res = null;
         if (firstName == null || firstName.isEmpty()) {
-            res = "Specify first name";
+            res = "Nezapomeň název poznámky";
         }
         if (res == null && (lastName == null || lastName.isEmpty())) {
-            res = "Specify last name";
+            res = "I text je důležitý";
         }
         if (res == null && address != null) {
             res = address.getValidate();
