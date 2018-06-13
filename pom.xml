@@ -16,7 +16,6 @@
         <module>client-web</module>
         <module>client-android</module>
         <module>client-ios</module>
-        <module>server</module>
         <module>js</module>
     </modules>
     <properties>
